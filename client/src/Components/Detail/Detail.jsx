@@ -53,12 +53,3 @@ const dogDetail = useSelector((state) => state.dogDetail);
 };
 
 export default Detail;
-
- {/* <Link to="/home">Back</Link>
-        <h3>Details</h3>
-        <section className="Details"> 
-      </section>*/}
-
-
-
-      

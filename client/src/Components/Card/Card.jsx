@@ -4,7 +4,6 @@ import "./card.css";
 
 
 function Card  ({ name, weight, image, id, temperaments })  {
-  console.log(weight);
   return (
     <div className="Container" style={{ backgroundImage: `url(${image})` }}>
       <div className="Container__info">

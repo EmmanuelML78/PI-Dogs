@@ -44,9 +44,9 @@ const getDogBD = async () => {
 //Esta ruta debe obtener todas aquellas razas de perros que coinciden con el nombre recibido 
 const getDogByNameAPI = async (name) => {
   try {
-    const response = await fetch(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
-    const dogs = await response.json()
-    const filteredDogs = dogs.filter((item) => {
+    const response = await axios.get(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
+    // const dogs = await response.json()
+    const filteredDogs = response.filter((item) => {
       return item.name.toLowerCase().includes(name.toLowerCase())
     })
     formmatter.setAPI(filteredDogs)
@@ -76,9 +76,9 @@ const getDogByNameBD = async (nameDog) => {
 //buscar el dogs por su id
 const getDogByIdAPI = async (id) => {
   try {
-    const response = await fetch(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
-    const data = await response.json()
-    const dog = data.find((item) => item.id === parseInt(id))
+    const response = await axios.get(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
+    // const data = await response.json()
+    const dog = response.find((item) => item.id === parseInt(id))
     formmatter.setAPI([dog])
     let detal = formmatter.dataFormatterApi()
     let detal2 = detal.pop()

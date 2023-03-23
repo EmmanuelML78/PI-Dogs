@@ -1,16 +1,17 @@
 const { Temperaments } = require('../db')
 const {API_KEY} = process.env
+const axios = require('axios')
 
 const getAllTemperaments = async () => {
   try {
-    const response = await fetch(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
-    const data = await response.json()
+    const response = await axios.get(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
+    // const data = await response.json()
 
     /* allTemperaments sera un array de arrays por ejemplo: [[1, 2], [3, 4], [5,6]]
     uso el metodo .flat() para aplanar el array, quedaria: [1, 2, 3, 4, 5, 6]
     */
 
-    const allTemperaments = data.map((item) => item.temperament?.split(', ')).flat()
+    const allTemperaments = response.map((item) => item.temperament?.split(', ')).flat()
 
     // Ahora queda eliminar todas las ocurrencias
 
