@@ -4,7 +4,7 @@ import {GET_DOGS, GET_ALLTEMPERAMENTS, GET_DOG_BY_NAME, GET_DOG_DETAIL, FILTER_B
 
 export function getDogs() {
     return async function(dispatch) {
-      let json = await axios.get("http://localhost:3001/dogs");
+      let json = await axios.get("/dogs");
       return dispatch({
         type: GET_DOGS,
         payload: json.data
@@ -14,7 +14,7 @@ export function getDogs() {
 
   export function getTemperaments ()  {
     return async (dispatch) => {
-        const res = await axios.get('http://localhost:3001/temperaments')
+        const res = await axios.get('/temperaments')
         return dispatch({
           type: GET_ALLTEMPERAMENTS,
           payload: res.data
@@ -24,14 +24,14 @@ export function getDogs() {
 
 export const getDogByName = (name) => {
   return async (dispatch) => {
-    const res = await axios.get(`http://localhost:3001/dogs?name=${name}`)
+    const res = await axios.get(`/dogs?name=${name}`)
     return dispatch({ type: GET_DOG_BY_NAME, payload: res.data })
   }
 }
 
 export const getDogDetail = (id) => {
   return async (dispatch) => {
-    const res = await axios.get(`http://localhost:3001/dogs/${id}`)
+    const res = await axios.get(`/dogs/${id}`)
     return dispatch({ type: GET_DOG_DETAIL, payload: res.data })
       
   }
