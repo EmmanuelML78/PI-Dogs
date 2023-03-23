@@ -66,6 +66,7 @@ function Home (){
     
     return(
         <div className="fondo" >
+            {display ? <Loading></Loading> : null}
             <Nav/>
             <SearchBar />
             <div >
