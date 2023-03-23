@@ -10,7 +10,7 @@ function SearchBar() {
 
   function handleSubmit(e){
     e.preventDefault();
-    dispatch(getDogByName(value));
+    dispatch(getDogByName());
     // setValue('');
 }
 
