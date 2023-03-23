@@ -5,6 +5,7 @@ import { validate } from "../Redux/utils";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../Redux/actions";
 import Nav from '../Nav/Nav'
+import axios from 'axios'
 
 const CreateDog = () => {
   const [inputs, setInputs] = useState({
@@ -37,7 +38,7 @@ const CreateDog = () => {
       return;
     }
     try {
-      await fetch("https://pi-dogs-production-5a80.up.railway.app/dogs", {
+      await axios.get("https://pi-dogs-production-5a80.up.railway.app/dogs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
