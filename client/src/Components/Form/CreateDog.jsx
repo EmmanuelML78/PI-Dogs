@@ -26,7 +26,6 @@ const CreateDog = () => {
   const handlerSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
-    alert('dog created')
     if (Object.values(error).length > 0 || !selected.length) {
       if (!selected.length) {
         setError({
