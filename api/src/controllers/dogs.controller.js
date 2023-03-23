@@ -45,8 +45,8 @@ const getDogBD = async () => {
 const getDogByNameAPI = async (name) => {
   try {
     const response = await axios.get(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
-    // const dogs = await response.json()
-    const filteredDogs = response.filter((item) => {
+    const data = response.data;
+    const filteredDogs = data.filter((item) => {
       return item.name.toLowerCase().includes(name.toLowerCase())
     })
     formmatter.setAPI(filteredDogs)
@@ -77,8 +77,8 @@ const getDogByNameBD = async (nameDog) => {
 const getDogByIdAPI = async (id) => {
   try {
     const response = await axios.get(`https://api.thedogapi.com/v1/breeds?${API_KEY}`)
-    // const data = await response.json()
-    const dog = response.find((item) => item.id === parseInt(id))
+    const data = response.data;
+    const dog = data.find((item) => item.id === parseInt(id))
     formmatter.setAPI([dog])
     let detal = formmatter.dataFormatterApi()
     let detal2 = detal.pop()
