@@ -37,7 +37,7 @@ const CreateDog = () => {
       return;
     }
     try {
-      await fetch("http://localhost:3001/dogs", {
+      await fetch("https://pi-dogs-production-5a80.up.railway.app/dogs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
