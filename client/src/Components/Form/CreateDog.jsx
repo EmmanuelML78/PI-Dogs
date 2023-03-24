@@ -5,7 +5,7 @@ import { validate } from "../Redux/utils";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../Redux/actions";
 import Nav from '../Nav/Nav'
-import axios from 'axios'
+import axios from "axios";
 
 const CreateDog = () => {
   const [inputs, setInputs] = useState({
@@ -24,6 +24,7 @@ const CreateDog = () => {
   const [error, setError] = useState({});
   const dispatch = useDispatch();
 
+
   const handlerSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -38,19 +39,17 @@ const CreateDog = () => {
       return;
     }
     try {
-      await axios.get("https://pi-dogs-production-5a80.up.railway.app/dogs", {
-        method: "POST",
+      await axios.post("https://pi-dogs-production-5a80.up.railway.app/dogs", {
+        name: inputs.name,
+        image: inputs.imagen,
+        temperaments: selected,
+        weight: `${inputs["peso-min"]} - ${inputs["peso-max"]}`,
+        height: `${inputs["altura-min"]} - ${inputs["altura-max"]}`,
+        life_span: `${inputs["lifeSpan-min"]} - ${inputs["lifeSpan-max"]} years`,
+      }, {
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: inputs.name,
-          image: inputs.imagen,
-          temperaments: selected,
-          weight: `${inputs["peso-min"]} - ${inputs["peso-max"]}`,
-          height: `${inputs["altura-min"]} - ${inputs["altura-max"]}`,
-          life_span: `${inputs["lifeSpan-min"]} - ${inputs["lifeSpan-max"]} years`,
-        }),
+        }
       });
       dispatch(getDogs());
       setInputs({
@@ -68,7 +67,38 @@ const CreateDog = () => {
     } catch (error) {
       console.error(new Error(error));
     }
-  };
+  //   try {
+  //     await fetch("https://pi-dogs-production-5a80.up.railway.app/dogs", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         name: inputs.name,
+  //         image: inputs.imagen,
+  //         temperaments: selected,
+  //         weight: `${inputs["peso-min"]} - ${inputs["peso-max"]}`,
+  //         height: `${inputs["altura-min"]} - ${inputs["altura-max"]}`,
+  //         life_span: `${inputs["lifeSpan-min"]} - ${inputs["lifeSpan-max"]} years`,
+  //       }),
+  //     });
+  //     dispatch(getDogs());
+  //     setInputs({
+  //       name: "",
+  //       imagen: "",
+  //       "peso-min": "0",
+  //       "peso-max": "0",
+  //       "altura-min": "0",
+  //       "altura-max": "0",
+  //       "lifeSpan-min": "",
+  //       "lifeSpan-max": "",
+  //     });
+  //     setSelected([]);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error(new Error(error));
+  //   }
+  // };
 
   const handlerChange = (e) => {
     setInputs({
