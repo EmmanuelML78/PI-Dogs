@@ -16,6 +16,8 @@
 
 .backgroundLeft {
   background-image: url("./img/lindo.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: contain;
   background-attachment: fixed;
   height: 100%;
@@ -23,6 +25,8 @@
 }
 .backgroundRight {
   background-image: url("./img/hola.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: contain;
   background-attachment: fixed;
   height: 100%;
