@@ -67,6 +67,7 @@ const CreateDog = () => {
     } catch (error) {
       console.error(new Error(error));
     }
+  }
   //   try {
   //     await fetch("https://pi-dogs-production-5a80.up.railway.app/dogs", {
   //       method: "POST",
