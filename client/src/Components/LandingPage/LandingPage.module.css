@@ -46,11 +46,11 @@
   text-align: center;
   font-weight: bold;
   padding: 0.7em 2em;
-  border: 3px solid #0E4DFA;
+  border: 3px solid #0e4dfa;
   border-radius: 10px;
   position: absolute;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
-  color: #0E4DFA;
+  color: #0e4dfa;
   text-decoration: none;
   transition: 0.3s ease all;
   z-index: 1;
@@ -65,7 +65,7 @@
   bottom: 0;
   opacity: 0;
   content: "";
-  background-color: #0E4DFA;
+  background-color: #0e4dfa;
   z-index: -1;
 }
 
@@ -83,4 +83,26 @@
 }
 .container button:active {
   transform: scale(0.9);
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+  .backgroundLeft {
+    height: 100%;
+    width: 50%;
+  }
+  .backgroundRight {
+    height: 100%;
+    width: 50%;
+  }
+  .Link {
+    align-self: flex-end;
+    position: absolute;
+    bottom: 4vh;
+    width: 100%;
+    text-align: center;
+    margin-left: -8.5%;
+  }
 }

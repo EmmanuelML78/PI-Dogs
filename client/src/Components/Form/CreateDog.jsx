@@ -68,38 +68,7 @@ const CreateDog = () => {
       console.error(new Error(error));
     }
   }
-  //   try {
-  //     await fetch("https://pi-dogs-production-5a80.up.railway.app/dogs", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         name: inputs.name,
-  //         image: inputs.imagen,
-  //         temperaments: selected,
-  //         weight: `${inputs["peso-min"]} - ${inputs["peso-max"]}`,
-  //         height: `${inputs["altura-min"]} - ${inputs["altura-max"]}`,
-  //         life_span: `${inputs["lifeSpan-min"]} - ${inputs["lifeSpan-max"]} years`,
-  //       }),
-  //     });
-  //     dispatch(getDogs());
-  //     setInputs({
-  //       name: "",
-  //       imagen: "",
-  //       "peso-min": "0",
-  //       "peso-max": "0",
-  //       "altura-min": "0",
-  //       "altura-max": "0",
-  //       "lifeSpan-min": "",
-  //       "lifeSpan-max": "",
-  //     });
-  //     setSelected([]);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error(new Error(error));
-  //   }
-  // };
+  
 
   const handlerChange = (e) => {
     setInputs({
