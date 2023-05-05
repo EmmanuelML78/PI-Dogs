@@ -53,32 +53,6 @@
   }
 }
 
-.content {
-  width: 40%;
-
-  gap: 30px;
-
-  margin-right: 20px;
-}
-
-.home {
-  padding-right: 20px;
-}
-
-.logo {
-  width: 60px;
-
-  height: 70px;
-}
-
-.divLink {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 20px;
-}
-
 /* Desktop styles */
 @media screen and (min-width: 992px) {
   .divHeader {
@@ -86,30 +60,4 @@
 
     gap: 50px;
   }
-}
-
-.content {
-  width: 30%;
-
-  gap: 50px;
-
-  margin-right: 50px;
-}
-
-.home {
-  padding-right: 50px;
-}
-
-.logo {
-  width: 70px;
-
-  height: 85px;
-}
-
-.divLink {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 50px;
 }
