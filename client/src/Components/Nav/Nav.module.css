@@ -45,19 +45,3 @@
   justify-content: flex-start;
   /* background-color: red; */
 }
-@media screen and (min-width: 768px) {
-  .divHeader {
-    height: 8vh;
-
-    gap: 30px;
-  }
-}
-
-/* Desktop styles */
-@media screen and (min-width: 992px) {
-  .divHeader {
-    height: 8vh;
-
-    gap: 50px;
-  }
-}
