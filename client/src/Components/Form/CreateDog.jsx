@@ -4,7 +4,7 @@ import { useState } from "react";
 import { validate } from "../Redux/utils";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../Redux/actions";
-import Nav from '../Nav/Nav'
+import Nav from "../Nav/Nav";
 import axios from "axios";
 
 const CreateDog = () => {
@@ -24,7 +24,6 @@ const CreateDog = () => {
   const [error, setError] = useState({});
   const dispatch = useDispatch();
 
-
   const handlerSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -39,18 +38,22 @@ const CreateDog = () => {
       return;
     }
     try {
-      await axios.post("https://pi-dogs-production-5a80.up.railway.app/dogs", {
-        name: inputs.name,
-        image: inputs.imagen,
-        temperaments: selected,
-        weight: `${inputs["peso-min"]} - ${inputs["peso-max"]}`,
-        height: `${inputs["altura-min"]} - ${inputs["altura-max"]}`,
-        life_span: `${inputs["lifeSpan-min"]} - ${inputs["lifeSpan-max"]} years`,
-      }, {
-        headers: {
-          "Content-Type": "application/json",
+      await axios.post(
+        "https://pi-dogs-production-5a80.up.railway.app/dogs",
+        {
+          name: inputs.name,
+          image: inputs.imagen,
+          temperaments: selected,
+          weight: `${inputs["peso-min"]} - ${inputs["peso-max"]}`,
+          height: `${inputs["altura-min"]} - ${inputs["altura-max"]}`,
+          life_span: `${inputs["lifeSpan-min"]} - ${inputs["lifeSpan-max"]} years`,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
       dispatch(getDogs());
       setInputs({
         name: "",
@@ -67,8 +70,7 @@ const CreateDog = () => {
     } catch (error) {
       console.error(new Error(error));
     }
-  }
-  
+  };
 
   const handlerChange = (e) => {
     setInputs({
@@ -100,180 +102,180 @@ const CreateDog = () => {
   };
   return (
     <div>
-    <Nav/>
-    <section className="Create__container">
-    <div><h1 className="animalista">Crea tu Perro</h1></div>
-    <form className="Form" onSubmit={handlerSubmit}>
-      <div>
-        <label>Raza</label>
-        <input
-          value={inputs.name}
-          onChange={handlerChange}
-          name="name"
-          type="text"
-          placeholder="Raza.."
-        />
-        {error.name && <p className="Form__warning">{error.name}</p>}
-      </div>
-      <div>
-        <label>Imagen</label>
-        <input
-          value={inputs.imagen}
-          onChange={handlerChange}
-          name="imagen"
-          type="text"
-          placeholder="https://Tuimagen.jpg"
-        />
-        {error.imagen && <p className="Form__warning">{error.imagen}</p>}
-      </div>
-      <div>
-        <p>Peso</p>
-        <label>
-          <p>Min: {inputs["peso-min"]} kgs</p>
-          <input
-            onChange={handlerChange}
-            value={inputs["peso-min"]}
-            type="range"
-            name="peso-min"
-            min="0"
-            max="100"
-          />
-        </label>
-        <label>
-          <p>Max: {inputs["peso-max"]} kgs</p>
-          <input
-            onChange={handlerChange}
-            value={inputs["peso-max"]}
-            type="range"
-            name="peso-max"
-            min="0"
-            max="100"
-          />
-        </label>
-        {error["peso-min"] && error["peso-max"] && (
-          <p className="Form__warning">
-            Los campos de Peso no pueden estar en 0
-          </p>
-        )}
-        {error["peso-min"] && !error["peso-max"] && (
-          <p className="Form__warning">{error["peso-min"]}</p>
-        )}
-        {error["peso-max"] && !error["peso-min"] && (
-          <p className="Form__warning">{error["peso-max"]}</p>
-        )}
-        {error.peso && <p className="Form__warning">{error.peso}</p>}
-      </div>
-      <div>
-        <p>Altura </p>
-        <label>
-          <p>Min: {inputs["altura-min"]} cm</p>
-          <input
-            onChange={handlerChange}
-            value={inputs["altura-min"]}
-            type="range"
-            name="altura-min"
-            min="0"
-            max="100"
-          />
-        </label>
-        <label>
-          <p>Max: {inputs["altura-max"]} cm</p>
-          <input
-            onChange={handlerChange}
-            value={inputs["altura-max"]}
-            type="range"
-            name="altura-max"
-            min="0"
-            max="100"
-          />
-        </label>
-        {error["altura-min"] && error["altura-max"] && (
-          <p className="Form__warning">
-            Los campos de altura no pueden estar en 0
-          </p>
-        )}
-        {error["altura-min"] && !error["altura-max"] && (
-          <p className="Form__warning">{error["altura-min"]}</p>
-        )}
-        {error["altura-max"] && !error["altura-min"] && (
-          <p className="Form__warning">{error["altura-max"]}</p>
-        )}
-        {error.altura && <p className="Form__warning">{error.altura}</p>}
-      </div>
-
-      <div>
-        <p>Años de vida</p>
-        <div className="LifeSpan__container">
-          <input
-            placeholder="min.."
-            onChange={handlerChange}
-            value={inputs["lifeSpan-min"]}
-            type="number"
-            name="lifeSpan-min"
-            min="0"
-            max="100"
-          />
-          <p>To</p>
-          <input
-            placeholder="max..."
-            onChange={handlerChange}
-            value={inputs["lifeSpan-max"]}
-            type="number"
-            name="lifeSpan-max"
-            min="0"
-            max="100"
-          />
+      <Nav />
+      <section className="Create__container">
+        <div>
+          <h1 className="animalista">Crea tu Raza</h1>
         </div>
-        {error["lifeSpan"] && (
-          <p className="Form__warning">{error["lifeSpan"]}</p>
-        )}
-      </div>
-      <div>
-        <label>Temperamentos</label>
-        <select onChange={handlerTemperaments}>
-          {temperaments?.map((item) => (
-            <option key={item.id} value={item.name}>
-              {item.name}
-            </option>
-          ))}
-        </select>
-        {selected.length > 0 && (
-          <div className="Temperaments__container">
-            {selected.map((item, index) => (
-              <div key={index}>
-                {item}
-                <p
-                  className="Temperaments__button"
-                  onClick={() => deleteTemperament(item)}
-                >
-                  X
-                </p>
-              </div>
-            ))}
+        <form className="Form" onSubmit={handlerSubmit}>
+          <div>
+            <label>Raza</label>
+            <input
+              value={inputs.name}
+              onChange={handlerChange}
+              name="name"
+              type="text"
+              placeholder="Raza.."
+            />
+            {error.name && <p className="Form__warning">{error.name}</p>}
           </div>
-        )}
-        {error.temperaments && (
-          <p className="Form__warning">{error.temperaments}</p>
-        )}
-      </div>
-      <button
-        className={loading && "buttonLoad"}
-        disabled={
-          !Object.values(inputs)
-            .splice(2, 6)
-            .reduce((prev, current) => (prev += parseInt(current)), 0) ||
-          !inputs.name ||
-          !inputs.imagen
-            ? true
-            : false
-        }
-        type="submit"
-      >
-        {!loading && "Crear"}
-        {loading && <div className="loading"></div>}
-      </button>
-    </form>
-    </section>
+          <div>
+            <label>Imagen</label>
+            <input
+              value={inputs.imagen}
+              onChange={handlerChange}
+              name="imagen"
+              type="text"
+              placeholder="https://Tuimagen.jpg"
+            />
+            {error.imagen && <p className="Form__warning">{error.imagen}</p>}
+          </div>
+          <div>
+            <p>Peso</p>
+            <label>
+              <p>Min: {inputs["peso-min"]} kgs</p>
+              <input
+                onChange={handlerChange}
+                value={inputs["peso-min"]}
+                type="range"
+                name="peso-min"
+                min="0"
+                max="100"
+              />
+            </label>
+            <label>
+              <p>Max: {inputs["peso-max"]} kgs</p>
+              <input
+                onChange={handlerChange}
+                value={inputs["peso-max"]}
+                type="range"
+                name="peso-max"
+                min="0"
+                max="100"
+              />
+            </label>
+            {error["peso-min"] && error["peso-max"] && (
+              <p className="Form__warning">
+                Los campos de Peso no pueden estar en 0
+              </p>
+            )}
+            {error["peso-min"] && !error["peso-max"] && (
+              <p className="Form__warning">{error["peso-min"]}</p>
+            )}
+            {error["peso-max"] && !error["peso-min"] && (
+              <p className="Form__warning">{error["peso-max"]}</p>
+            )}
+            {error.peso && <p className="Form__warning">{error.peso}</p>}
+          </div>
+          <div>
+            <p>Altura </p>
+            <label>
+              <p>Min: {inputs["altura-min"]} cm</p>
+              <input
+                onChange={handlerChange}
+                value={inputs["altura-min"]}
+                type="range"
+                name="altura-min"
+                min="0"
+                max="100"
+              />
+            </label>
+            <label>
+              <p>Max: {inputs["altura-max"]} cm</p>
+              <input
+                onChange={handlerChange}
+                value={inputs["altura-max"]}
+                type="range"
+                name="altura-max"
+                min="0"
+                max="100"
+              />
+            </label>
+            {error["altura-min"] && error["altura-max"] && (
+              <p className="Form__warning">
+                Los campos de altura no pueden estar en 0
+              </p>
+            )}
+            {error["altura-min"] && !error["altura-max"] && (
+              <p className="Form__warning">{error["altura-min"]}</p>
+            )}
+            {error["altura-max"] && !error["altura-min"] && (
+              <p className="Form__warning">{error["altura-max"]}</p>
+            )}
+            {error.altura && <p className="Form__warning">{error.altura}</p>}
+          </div>
+
+          <div>
+            <p>Años de vida</p>
+            <div className="LifeSpan__container">
+              <input
+                placeholder="min.."
+                onChange={handlerChange}
+                value={inputs["lifeSpan-min"]}
+                type="number"
+                name="lifeSpan-min"
+                min="0"
+                max="100"
+              />
+              <p>To</p>
+              <input
+                placeholder="max..."
+                onChange={handlerChange}
+                value={inputs["lifeSpan-max"]}
+                type="number"
+                name="lifeSpan-max"
+                min="0"
+                max="100"
+              />
+            </div>
+            {error["lifeSpan"] && (
+              <p className="Form__warning">{error["lifeSpan"]}</p>
+            )}
+          </div>
+          <div>
+            <label>Temperamentos</label>
+            <select onChange={handlerTemperaments}>
+              {temperaments?.map((item) => (
+                <option key={item.id} value={item.name}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            {selected.length > 0 && (
+              <div className="Temperaments__container">
+                {selected.map((item, index) => (
+                  <div key={index}>
+                    {item}
+                    <p
+                      className="Temperaments__button"
+                      onClick={() => deleteTemperament(item)}>
+                      X
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+            {error.temperaments && (
+              <p className="Form__warning">{error.temperaments}</p>
+            )}
+          </div>
+          <button
+            className={loading && "buttonLoad"}
+            disabled={
+              !Object.values(inputs)
+                .splice(2, 6)
+                .reduce((prev, current) => (prev += parseInt(current)), 0) ||
+              !inputs.name ||
+              !inputs.imagen
+                ? true
+                : false
+            }
+            type="submit">
+            {!loading && "Crear"}
+            {loading && <div className="loading"></div>}
+          </button>
+        </form>
+      </section>
     </div>
   );
 };

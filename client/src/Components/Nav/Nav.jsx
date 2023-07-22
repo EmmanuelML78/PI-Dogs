@@ -1,27 +1,31 @@
-import {React, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
-import {getDogs} from "../Redux/actions";
-import { Link } from 'react-router-dom';
-import styles from './Nav.module.css'
-import logo from "../img/logo2.jpg"
+import { React, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getDogs } from "../Redux/actions";
+import { Link } from "react-router-dom";
+import "./Nav.css";
+import logo from "../img/logo2.jpg";
 
-export default function Nav(){
-    const dispatch =  useDispatch();
+export default function Nav() {
+  const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(()=>{
-        //cada vez q renderizo el comp me dispacha todos los perros
-        dispatch(getDogs())
-    }, [dispatch]);
-
-    return(
-        <header className = {styles.divHeader}>
-            <div className = {styles.contentLogo}>
-                <Link  to = '/' className = {styles.linkLogo}><img className={styles.logo} alt= '' src = {logo}/></Link>
-            </div>
-            <div className = {styles.content}>
-                <Link className = {styles.home}  to = '/home'>Home</Link>
-                <Link className = {styles.home} to = '/createDog'>Create</Link>
-            </div>
-        </header>
-    )
+  return (
+    <div className="navbar">
+      <div className="nav_logo">
+        <Link to="/">
+          <img className="logo" alt="" src={logo} />
+        </Link>
+      </div>
+      <div className={`nav_items ${isOpen && "open"}`}>
+        <Link to="/home">Home</Link>
+        <Link to="/createDog">Create</Link>
+      </div>
+      <div
+        className={`nav_toggle ${isOpen && "open"}`}
+        onClick={() => setIsOpen(!isOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  );
 }

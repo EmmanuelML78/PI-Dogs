@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url('./Components/img/fondo1.jpg');
+  background-image: url("./Components/img/fondodog.jpeg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
