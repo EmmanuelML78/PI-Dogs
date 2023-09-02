@@ -1,34 +1,41 @@
 /* eslint-disable camelcase */
-const router = require('express').Router()
-const { getDogApi, getDogBD, getDogByNameAPI, getDogByNameBD, getDogByIdAPI, getDogByIdBD} = require('../controllers/dogs.controller')
-const { Dogs, Temperaments } = require('../db')
-const getAllTemperaments = require('../controllers/temperaments.controller')
+const router = require("express").Router();
+const {
+  getDogApi,
+  getDogBD,
+  getDogByNameAPI,
+  getDogByNameBD,
+  getDogByIdAPI,
+  getDogByIdBD,
+} = require("../controllers/dogs.controller");
+const { Dogs, Temperaments } = require("../db");
+const getAllTemperaments = require("../controllers/temperaments.controller");
 
 //obtenemos las razas de los perros por query y mostramos todos los dogs
-router.get('/', async (req, res) => {
-  const { name } = req.query
+router.get("/", async (req, res) => {
+  const { name } = req.query;
   try {
     if (name) {
-      const dogsOfApi = await getDogByNameAPI(name)
-      const dogsOfBD = await getDogByNameBD(name)
+      const dogsOfApi = await getDogByNameAPI(name);
+      const dogsOfBD = await getDogByNameBD(name);
 
       if (!dogsOfBD.length && !dogsOfApi.length) {
-        return res.status(404).send({ error: 'Dog not found' })
+        return res.status(404).send({ error: "Dog not found" });
       }
-      const concatData = dogsOfApi.concat(dogsOfBD)
-      return res.status(200).send(concatData)
+      const concatData = dogsOfApi.concat(dogsOfBD);
+      return res.status(200).send(concatData);
     }
-    const dogsOfApi = await getDogApi()
-    const dogsOfBD = await getDogBD()
-    return res.status(200).send(dogsOfApi.concat(dogsOfBD))
+    const dogsOfApi = await getDogApi();
+    const dogsOfBD = await getDogBD();
+    return res.status(200).send(dogsOfApi.concat(dogsOfBD));
   } catch (error) {
-    res.status(400).send({ error: error.message })
+    res.status(400).send({ error: error.message });
   }
-})
+});
 
 // buscar por id
-router.get('/:id', async (req, res) => {
-  const { id } = req.params
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
   /*
     Valido primero si el id recibido es un id serial o un UUID
     id --> de tipo Integer
@@ -36,48 +43,47 @@ router.get('/:id', async (req, res) => {
   */
   try {
     if (/\D/.test(id)) {
-      const dog = await getDogByIdBD(id)
-      return res.status(200).send(dog)
+      const dog = await getDogByIdBD(id);
+      return res.status(200).send(dog);
     }
-    const dogApi = await getDogByIdAPI(id)
-    return res.status(200).send(dogApi)
+    const dogApi = await getDogByIdAPI(id);
+    return res.status(200).send(dogApi);
   } catch (error) {
-    res.status(404).send({ error: error.message })
+    res.status(404).send({ error: error.message });
   }
-})
-
-
+});
 
 // creacion de dogs
-router.post('/', async (req, res) => {
-  await getAllTemperaments()
+router.post("/", async (req, res) => {
+  await getAllTemperaments();
   try {
-    const { name, image, life_span, height, weight, temperaments } = req.body
-    const temperamentsId = []
+    const { name, image, life_span, height, weight, temperaments } = req.body;
+    const temperamentsId = [];
 
-    if (!name || !life_span || !height || !weight || !temperaments) throw new Error('All fields are required')
+    if (!name || !life_span || !height || !weight || !temperaments)
+      throw new Error("All fields are required");
     const dogCreated = await Dogs.create({
       name,
-      image: image || 'default',
+      image: image || "default",
       life_span,
       height,
-      weight
-    })
+      weight,
+    });
 
     for (const temperament of temperaments) {
       const response = await Temperaments.findOne({
         where: {
-          name: temperament
-        }
-      })
-      temperamentsId.push(response.id)
+          name: temperament,
+        },
+      });
+      temperamentsId.push(response.id);
     }
 
-    dogCreated.addTemperaments(temperamentsId)
-    return res.status(201).send({ message: 'created', data: dogCreated })
+    dogCreated.addTemperaments(temperamentsId);
+    return res.status(201).send({ message: "created", data: dogCreated });
   } catch (error) {
-    res.status(400).send({ error: error.message })
+    res.status(400).send({ error: error.message });
   }
-})
+});
 
-module.exports = router
+module.exports = router;
