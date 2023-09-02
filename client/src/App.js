@@ -8,7 +8,7 @@ import CreateDog from "./Components/Form/CreateDog";
 import axios from "axios";
 const desarrollo = "http://localhost:3001";
 const produccion = "https://despliegue-dogapp-kezm-dev.fl0.io";
-axios.defaults.baseURL = desarrollo;
+axios.defaults.baseURL = produccion;
 
 function App() {
   return (
